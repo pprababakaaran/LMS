@@ -1,0 +1,26 @@
+1. Based on Sold To selection we are going to identify HIS customer as in Purchase new.(Requirement ID: 2)
+
+2. For Export controlled advance exchange parts always default plant should be 1014.(Requirement ID: 3)
+
+3. For HIS customer, if stock is not available in HIS 100B storage location, need to check HIS 100C storage location. If part is not available in both storage location, then need to place an order againt HIS 100B.(Requirement ID: 5)
+                I. Who is going to handle this logic? Portal or SAP 
+
+4. If no stock available in HIS 100B and 100C, we should place an order against 100B. And need to create case in SFDC.(Requirement ID: 6)
+                I. Do we need to create a case as deferred order? 
+                II. What should be subject line for case? 
+                III. What are all the fields should be filled in SFDC Case?
+                IV. Which approach needs to be followed? API case creation or Email case creation. If email creation, we have to involve SFDC team and align our deployment accordingly.
+
+5. Portal will able to handle the Free Goods part.(Requirement ID: 7)
+                I. Is Free Goods parts are applicable for Advance Exchange type?. If it so, please provide part number to test existing flow.
+                
+From Requirement ID 5 and 6, I understood below points:
+
+1. Even though part is not available in HIS location(100B, 100C storage location) for HIS customer, we need to place an order against HIS 100B. We are not looking the Sky Harbor site.
+2. In this case, it is enough to send only one request to SAP. SAP also will return only one response.
+
+
+
+HonSPEXGetAvailTaskCmdImpl.java
+HonSPEXCommonUtil.java
+SAPOrderUtil.java
